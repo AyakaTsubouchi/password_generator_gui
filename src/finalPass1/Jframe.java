@@ -18,7 +18,7 @@ import java.util.Random;
 import java.awt.event.InputMethodListener;
 import java.awt.event.InputMethodEvent;
 
-public class Jframe extends JFrame {
+public class Jframe extends JFrame  {
 
 	private JPanel contentPane;
 	private JTextField resultField;
@@ -69,8 +69,15 @@ public class Jframe extends JFrame {
 
 		JButton btnNewButton = new JButton("create");
 		btnNewButton.addMouseListener(new MouseAdapter() {
+			
+			
 
 			public void mouseClicked(MouseEvent e) {
+				
+		//================================================================================================
+				//here is my code( others are autmatically created
+		//================================================================================================
+
 				ArrayList<String> passlist = new ArrayList<>();
 				if (upperCase.isSelected()) {					
 					SetLetters.setletter(passlist, (SetLetters.UppercaseLetters));
@@ -94,10 +101,15 @@ public class Jframe extends JFrame {
 					int myRandom = rnd.nextInt(passlist.size());
 					password.add(passlist.get(myRandom));
 				}
-				String finallypass = password.toString().replace(",", "").replace("[", "").replace("]", "");
+				String finallypass = password.toString().replace(",", "").replace("[", "").replace("]", "").replace(" ", "");
 				resultField.setText(finallypass);
 			}
 		});
+		
+		//================================================================================================
+		
+		//================================================================================================
+
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup().addContainerGap()
@@ -137,5 +149,6 @@ public class Jframe extends JFrame {
 		max.add(sizet);
 		sizet.setColumns(10);
 		contentPane.setLayout(gl_contentPane);
+		
 	}
 }
