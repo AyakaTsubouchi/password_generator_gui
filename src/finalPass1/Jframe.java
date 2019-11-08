@@ -15,7 +15,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Random;
-
+import java.awt.event.InputMethodListener;
+import java.awt.event.InputMethodEvent;
 
 public class Jframe extends JFrame {
 
@@ -48,109 +49,91 @@ public class Jframe extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		
+
 		JPanel radioButtons = new JPanel();
-		
+
 		JRadioButton upperCase = new JRadioButton("uppercase");
 		radioButtons.add(upperCase);
-		
+
 		JRadioButton lowerCase = new JRadioButton("lowercase");
 		radioButtons.add(lowerCase);
-		
+
 		JRadioButton number = new JRadioButton("number");
 		radioButtons.add(number);
-		
+
 		JPanel result = new JPanel();
-		
+
 		JPanel max = new JPanel();
-		
+
 		JPanel panel = new JPanel();
-		
+
 		JButton btnNewButton = new JButton("create");
-		btnNewButton.addMouseListener(new MouseAdapter() {	
-			
+		btnNewButton.addMouseListener(new MouseAdapter() {
+
 			public void mouseClicked(MouseEvent e) {
 				ArrayList<String> passlist = new ArrayList<>();
-				if(upperCase.isSelected()) {
-					for(int i = 0; i < (SetLetters.UppercaseLetters).length; i++) {
-						passlist.add(SetLetters.UppercaseLetters[i]);
-						
-					}
+				if (upperCase.isSelected()) {					
+					SetLetters.setletter(passlist, (SetLetters.UppercaseLetters));
 				}
-				if(lowerCase.isSelected()) {
-					for(int i = 0; i < (SetLetters.LowercaseLetters).length; i++) {
-						
-						passlist.add(SetLetters.LowercaseLetters[i]);
-						
-					}
+				if (lowerCase.isSelected()) {
+					SetLetters.setletter(passlist, (SetLetters.LowercaseLetters));
 				}
-				if(number.isSelected()) {
-					
-					for(int i = 0; i < (SetLetters.Numbers).length; i++) {						
-						passlist.add(SetLetters.Numbers[i]);						//System.out.print(passlist.get(i));
-					}					
-				}
-				for(int i = 0; i < passlist.size();i++) {
+				if (number.isSelected()) {
+					SetLetters.setletter(passlist, (SetLetters.Numbers));
 				}
 				
+				for (int i = 0; i < passlist.size(); i++) {
+				}
+
 				String size = sizet.getText();
 				int intSize = Integer.parseInt(size);
 				ArrayList<String> password = new ArrayList<>();
-			
-				
+
 				for (int i = 0; i < intSize; i++) {
 					Random rnd = new Random();
 					int myRandom = rnd.nextInt(passlist.size());
-					password.add(passlist.get(myRandom));								
-			}
-				String finallypass = password.toString().replace(",", "").replace("[", "").replace("]","");
+					password.add(passlist.get(myRandom));
+				}
+				String finallypass = password.toString().replace(",", "").replace("[", "").replace("]", "");
 				resultField.setText(finallypass);
-			}});
+			}
+		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(panel, GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
-						.addComponent(radioButtons, GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
-						.addComponent(max, GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
-						.addComponent(result, GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
-						.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE))
-					.addContainerGap())
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(25)
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(radioButtons, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(max, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(btnNewButton)
-					.addPreferredGap(ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
-					.addComponent(result, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(21))
-		);
-		
+		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup().addContainerGap()
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(panel, GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
+								.addComponent(radioButtons, GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
+								.addComponent(max, GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
+								.addComponent(result, GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
+								.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE))
+						.addContainerGap()));
+		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
+				.createSequentialGroup().addGap(25)
+				.addComponent(panel, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE).addGap(18)
+				.addComponent(radioButtons, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+						GroupLayout.PREFERRED_SIZE)
+				.addPreferredGap(ComponentPlacement.RELATED)
+				.addComponent(max, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE).addGap(18)
+				.addComponent(btnNewButton).addPreferredGap(ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+				.addComponent(result, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+				.addGap(21)));
+
 		JLabel lblPasswordGenerator = new JLabel("Password generator");
 		panel.add(lblPasswordGenerator);
-		
+
 		JLabel resultl = new JLabel("pass word");
 		result.add(resultl);
-		
+
 		resultField = new JTextField();
 		result.add(resultField);
 		resultField.setColumns(10);
-		
+
 		JLabel sizel = new JLabel("size");
 		max.add(sizel);
-		
+
 		sizet = new JTextField();
-		
-		
+
 		max.add(sizet);
 		sizet.setColumns(10);
 		contentPane.setLayout(gl_contentPane);

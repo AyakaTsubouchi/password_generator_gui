@@ -10,36 +10,12 @@ public class SetLetters {
 	static String[] Numbers = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" };
 	static ArrayList<String> lettersPool = new ArrayList<String>();
 	static int lettersPoolLength = 0;
-	
 
-	public static ArrayList<String> uppercase() {
+	public static ArrayList<String> setletter(ArrayList<String> setlist, String[] array) {
 
-		for (int i = 0; i < UppercaseLetters.length; i++) {
-			lettersPool.add(UppercaseLetters[i]);
+		for (int i = 0; i < array.length; i++) {
+			setlist.add(array[i]);
 		}
-		lettersPoolLength += UppercaseLetters.length;
-		System.out.println(lettersPool);
-		return lettersPool;
-
-	}
-
-	public static ArrayList<String> lowercase() {
-
-		for (int i = 0; i < LowercaseLetters.length; i++) {
-			lettersPool.add(LowercaseLetters[i]);
-		}
-		lettersPoolLength += LowercaseLetters.length;
-		return lettersPool;
-	}
-	public static ArrayList<String> numbers() {
-		
-		for (int i = 0; i < Numbers.length; i++) {
-			lettersPool.add(Numbers[i]);
-		}
-		lettersPoolLength += Numbers.length;
-		return lettersPool;
-		
+		return setlist;
 	}
 }
-
-
