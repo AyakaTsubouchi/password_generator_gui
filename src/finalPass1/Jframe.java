@@ -88,21 +88,13 @@ public class Jframe extends JFrame  {
 				if (number.isSelected()) {
 					SetLetters.setletter(passlist, (SetLetters.Numbers));
 				}
-				
-				for (int i = 0; i < passlist.size(); i++) {
-				}
-
+				//
 				String size = sizet.getText();
 				int intSize = Integer.parseInt(size);
-				ArrayList<String> password = new ArrayList<>();
 
-				for (int i = 0; i < intSize; i++) {
-					Random rnd = new Random();
-					int myRandom = rnd.nextInt(passlist.size());
-					password.add(passlist.get(myRandom));
-				}
-				String finallypass = password.toString().replace(",", "").replace("[", "").replace("]", "").replace(" ", "");
-				resultField.setText(finallypass);
+				GetPassword finalpass = new GetPassword();
+				String mys = finalpass.GetPassword(intSize, passlist);
+				resultField.setText(mys);
 			}
 		});
 		
